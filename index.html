@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body id="body" style="zoom:2; margin:0; background-size: 64px 64px; background-color: #EEEEEE">
+
+<script>
+var exports = {};
+</script>
+<script src="index.js"></script>
+<script>
+var logo = document.createElement("div");
+var body = document.getElementById("body");
+body.appendChild (logo);
+logo.innerHTML = exports.generateInAppLogo(64, true);
+console.log(logo.innerHTML);
+
+</script>
+
+
+</body>
+</html>
