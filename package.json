@@ -1,0 +1,23 @@
+{
+  "name": "luna-logo",
+  "version": "0.1.0",
+  "description": "Logo for luna-lang.org",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luna/luna-logo.git"
+  },
+  "keywords": [
+    "luna",
+    "logo"
+  ],
+  "author": "Luna Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luna/luna-logo/issues"
+  },
+  "homepage": "https://github.com/luna/luna-logo#readme"
+}

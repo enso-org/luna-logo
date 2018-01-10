@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<body id="body" style="zoom:2; margin:0; background-size: 64px 64px; background-color: #101010">
 
-<script>
-
-function mkLunaLogo (size=64, compatibleMode=false) {
+exports.generate = function (size=64, compatibleMode=true) {
 
   var borderWidth  = 10 - Math.log2(Math.min(size,128))
   var topRadius    = 32;
@@ -17,8 +12,6 @@ function mkLunaLogo (size=64, compatibleMode=false) {
   var ref = null;
   if (compatibleMode) {ref = "xlink:href"}
   else                {ref = "href"}
-
-  console.log(borderWidth);
 
   var html = `
   <svg height="${size}" width="${size}">
@@ -57,21 +50,9 @@ function mkLunaLogo (size=64, compatibleMode=false) {
       </g>
 
     </defs>
-    <use ${ref}="#logo" fill="#CF1C3B" transform="scale(${size/64})"/>
+    <use ${ref}="#logo" fill="#b3802c" transform="scale(${size/64})"/>
 
   </svg>
   `
   return html
 }
-
-var logo = document.createElement("div");
-var body = document.getElementById("body");
-body.appendChild (logo);
-logo.innerHTML = mkLunaLogo(64, true);
-
-console.log(mkLunaLogo(64, true));
-</script>
-
-
-</body>
-</html>
