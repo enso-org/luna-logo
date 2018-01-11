@@ -79,7 +79,8 @@ class AppLogo extends Logo {
     super(size,compatibleMode);
 
     var border = 4
-    this.size += 2*border
+    var scale  = (64-2*border)/64
+    // this.size += 2*border
 
     this.defs = `
        <linearGradient id="cd" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
@@ -90,13 +91,14 @@ class AppLogo extends Logo {
          <feOffset result="offOut" in="SourceAlpha" dx="0" dy="2" />
          <feGaussianBlur result="blurOut" in="offOut" stdDeviation="1" />
        </filter>
+       <g id="scalledLogo" transform="scale(${scale})"><use ${this.ref}="#filledLogo"/></g>
        <g id="filledLogo" transform="translate(${border}, ${border})">
          <circle cx="32" cy="32" r="30" fill="#211F1A"/>
          <use ${this.ref}="#logo" fill="url(#cd)"/>
        </g>`;
     this.body = `
-        <use ${this.ref}="#filledLogo" filter="url(#toShadow)" opacity="0.7"/>
-        <use ${this.ref}="#filledLogo" />
+        <use ${this.ref}="#scalledLogo" filter="url(#toShadow)" opacity="0.7"/>
+        <use ${this.ref}="#scalledLogo" />
       `
   }
 }
