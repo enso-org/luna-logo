@@ -1,6 +1,6 @@
 {
   "name": "luna-logo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Logo for luna-lang.org",
   "main": "index.js",
   "scripts": {
