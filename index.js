@@ -84,7 +84,7 @@ class AppLogo extends Logo {
     var scale  = (64-2*border)/64
 
     this.defs = `
-       <linearGradient id="cd" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
+       <linearGradient id="cd" x1="0" y1="0" x2="0" y2="64px" gradientUnits="userSpaceOnUse">
          <stop offset="0%"   style="stop-color:#ECAE67;stop-opacity:1" />
          <stop offset="100%" style="stop-color:#E2963B;stop-opacity:1" />
        </linearGradient>
@@ -102,7 +102,6 @@ class AppLogo extends Logo {
         <use ${this.ref}="#txLogo" filter="url(#toShadow)" opacity="0.7"/>
         <use ${this.ref}="#txLogo"/>
       `;
-
   }
 }
 
