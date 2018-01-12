@@ -7,7 +7,7 @@ class Logo {
     this.compatibleMode = compatibleMode;
     var scaleStop = 128;
     var scaleLog  = Math.log2(scaleStop);
-    this.borderWidth    = 10 - Math.pow(Math.log2(Math.min(size,128))/scaleLog,3)*scaleLog;
+    this.borderWidth    = 10 - Math.pow(Math.log2(Math.min(size,128))/scaleLog,2)*scaleLog;
     this.topRadius      = 32;
     this.borderOffset   = this.borderWidth;
     this.innerRadius    = this.topRadius - this.borderWidth - this.borderOffset;
