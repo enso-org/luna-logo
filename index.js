@@ -5,19 +5,25 @@ class Logo {
   constructor(size=64, compatibleMode=true) {
     this.size           = size;
     this.compatibleMode = compatibleMode;
+    this.borderMax      = 10
+    this.borderSpread   = 0
+    this.init();
+  }
+
+  init() {
     var scaleStop = 128;
     var scaleLog  = Math.log2(scaleStop);
-    this.borderWidth    = 10 - Math.pow(Math.log2(Math.min(size,128))/scaleLog,3)*scaleLog;
+    this.borderWidth    = this.borderMax - Math.pow(Math.log2(Math.min(this.size,128))/scaleLog,3)*scaleLog;
     this.topRadius      = 32;
-    this.borderOffset   = this.borderWidth;
+    this.borderOffset   = this.borderWidth - this.borderSpread;
     this.innerRadius    = this.topRadius - this.borderWidth - this.borderOffset;
     this.atomRadius     = this.innerRadius / 2;
     this.atomDiff       = 0;
     this.d              = 4;
-    this.scale          = size/64;
+    this.scale          = this.size/64;
 
-    if (compatibleMode) {this.ref = "xlink:href"}
-    else                {this.ref = "href"}
+    if (this.compatibleMode) {this.ref = "xlink:href"}
+    else                     {this.ref = "href"}
 
     this.defs = ''
     this.body = `<use ${this.ref}="#logo" fill="red"/>`
@@ -25,7 +31,7 @@ class Logo {
 
   generate() {
     return `
-<svg height="${this.size}" width="${this.size}" viewBox="0 0 ${this.size} ${this.size}">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" height="${this.size}" width="${this.size}" viewBox="0 0 ${this.size} ${this.size}">
   <defs>
     <circle id="innerCircle" cx="32" cy="32" r="${this.innerRadius}"/>
     <circle id="leftAtom"    cx="${this.borderWidth + this.borderOffset +     this.atomRadius + this.atomDiff - this.d}" cy="32" r="${this.atomRadius + this.atomDiff + this.d}"/>
@@ -76,6 +82,16 @@ class InAppLogo extends Logo {
   }
 }
 
+class MinimalBlackLogo extends Logo {
+  constructor(size, compatibleMode) {
+    super(size,compatibleMode);
+    this.borderMax = 10
+    this.borderSpread = 0
+    this.init()
+    this.body = `<use ${this.ref}="#logo" fill="black"/>`
+  }
+}
+
 class AppLogo extends Logo {
   constructor(size, compatibleMode) {
     super(size,compatibleMode);
@@ -105,8 +121,59 @@ class AppLogo extends Logo {
   }
 }
 
+class BlackBackgroundLogo extends Logo {
+  constructor(size, compatibleMode) {
+    super(size,compatibleMode);
+
+    var border = 4
+    var scale  = (64-2*border)/64
+
+    this.defs = `
+       <linearGradient id="cd" x1="0" y1="0" x2="0" y2="64px" gradientUnits="userSpaceOnUse">
+         <stop offset="0%"   style="stop-color:#ECAE67;stop-opacity:1" />
+         <stop offset="100%" style="stop-color:#E2963B;stop-opacity:1" />
+       </linearGradient>
+       <g id="txLogo" transform="translate(${border}, ${border})"><use ${this.ref}="#scalledLogo"/></g>
+       <g id="scalledLogo" transform="scale(${scale})"><use ${this.ref}="#filledLogo"/></g>
+       <g id="filledLogo">
+         <use ${this.ref}="#logo" fill="url(#cd)"/>
+       </g>`;
+    this.body = `
+        <rect id="bg" width="64" height="64" fill="#211F1A"/>
+        <use ${this.ref}="#txLogo"/>
+      `;
+  }
+}
+
+class WhiteBackgroundLogo extends Logo {
+  constructor(size, compatibleMode) {
+    super(size,compatibleMode);
+
+    var border = 4
+    var scale  = (64-2*border)/64
+
+    this.defs = `
+       <linearGradient id="cd" x1="0" y1="0" x2="0" y2="64px" gradientUnits="userSpaceOnUse">
+         <stop offset="0%"   style="stop-color:#FAAF67;stop-opacity:1" />
+         <stop offset="100%" style="stop-color:#EB9139;stop-opacity:1" />
+       </linearGradient>
+       <g id="txLogo" transform="translate(${border}, ${border})"><use ${this.ref}="#scalledLogo"/></g>
+       <g id="scalledLogo" transform="scale(${scale})"><use ${this.ref}="#filledLogo"/></g>
+
+       <g id="filledLogo">
+         <use ${this.ref}="#logo" fill="url(#cd)"/>
+       </g>`;
+    this.body = `
+        <use ${this.ref}="#txLogo"/>
+      `;
+  }
+}
+
 fastGenerate = (cons) => (...args) => new cons(...args).generate()
 
-exports.generateLogo      = fastGenerate(Logo);
-exports.generateAppLogo   = fastGenerate(AppLogo);
-exports.generateInAppLogo = fastGenerate(InAppLogo);
+exports.generateLogo             = fastGenerate(Logo);
+exports.generateAppLogo          = fastGenerate(AppLogo);
+exports.generateInAppLogo        = fastGenerate(InAppLogo);
+exports.generateMinimalBlackLogo = fastGenerate(MinimalBlackLogo);
+exports.generateBlackBackgroundLogo = fastGenerate(BlackBackgroundLogo);
+exports.generateWhiteBackgroundLogo = fastGenerate(WhiteBackgroundLogo);
