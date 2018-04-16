@@ -52,7 +52,7 @@ class Text {
     var docWidth = (widthOf_luna + this.xoff - this.spacing) * this.scale
 
     return `
-<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" height="${this.hh}" width="${docWidth}" viewBox="0 0 ${docWidth} ${this.hh}">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="${this.hh}" width="${docWidth}" viewBox="0 0 ${docWidth} ${this.hh}">
   <defs>
 
     <rect id="bg" width="${this.ww}" height="${this.hh}" fill="white"/>
@@ -150,7 +150,7 @@ class Logo {
 
   generate() {
     return `
-<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" height="${this.size}" width="${this.size}" viewBox="0 0 ${this.size} ${this.size}">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="${this.size}" width="${this.size}" viewBox="0 0 ${this.size} ${this.size}">
   <defs>
     <circle id="innerCircle" cx="32" cy="32" r="${this.innerRadius}"/>
     <circle id="leftAtom"    cx="${this.borderWidth + this.borderOffset +     this.atomRadius + this.atomDiff - this.d}" cy="32" r="${this.atomRadius + this.atomDiff + this.d}"/>
