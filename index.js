@@ -32,8 +32,8 @@ class Text {
     this.r = this.height/3.5;
     this.baseHeight = this.r*2;
 
-    this.ww = 240;
-    this.hh = this.size;
+    this.ww = 240 * 10; // FIXME: * 10 added to make letters not clipped in small scale. Just a hack.
+    this.hh = this.size * 10; // FIXME: ^^^
 
     this.spacing = 10;
 
