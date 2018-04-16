@@ -52,7 +52,7 @@ class Text {
     var docWidth = (widthOf_luna + this.xoff - this.spacing) * this.scale
 
     return `
-<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="${this.hh}" width="${docWidth}" viewBox="0 0 ${docWidth} ${this.hh}">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="${this.size}" width="${docWidth}" viewBox="0 0 ${docWidth} ${this.size}">
   <defs>
 
     <rect id="bg" width="${this.ww}" height="${this.hh}" fill="white"/>
